@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>لوحة التحكم | Admin Dashboard</title>
+  <link rel="stylesheet" href="admin.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+</head>
+<body>
+  <div id="authGate" style="max-width:420px;margin:80px auto;padding:24px;border:1px solid #e5e7eb;border-radius:12px;background:#fff;box-shadow:0 10px 25px rgba(0,0,0,.08);">
+    <h2 style="margin:0 0 16px 0;text-align:center;">تسجيل دخول لوحة التحكم</h2>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <label for="adminEmail">Email</label>
+      <input id="adminEmail" type="email" placeholder="admin@example.com" style="padding:10px;border:1px solid #d1d5db;border-radius:8px;" />
+      <label for="adminPassword">Password</label>
+      <input id="adminPassword" type="password" placeholder="••••••••" style="padding:10px;border:1px solid #d1d5db;border-radius:8px;" />
+      <button id="adminLoginBtn" class="btn" style="margin-top:6px;">دخول</button>
+      <button id="forgotPasswordBtn" type="button" style="margin-top:2px;background:none;border:none;color:#1d4ed8;cursor:pointer;text-align:right;padding:0;">نسيت كلمة المرور؟</button>
+      <div style="font-size:12px;color:#64748b;line-height:1.6;">عند طلب إعادة التعيين قد تستغرق الرسالة دقائق قليلة. يرجى فحص Inbox و Spam/Junk.</div>
+      <div id="authError" style="display:none;color:#b91c1c;font-size:14px;"></div>
+    </div>
+  </div>
+
+  <div id="adminApp" style="display:none;">
+    <header class="topbar">
+      <h1>لوحة تحكم طلبات التوظيف</h1>
+      <button id="logoutBtn" class="btn secondary">تسجيل خروج</button>
+    </header>
+
+    <main class="layout">
+      <aside class="sidebar">
+        <h2>التصفية</h2>
+        <label>الوظيفة</label>
+        <select id="jobFilter">
+          <option value="">الكل</option>
+        </select>
+
+        <label>بحث بالاسم / الهاتف / البريد</label>
+        <input id="searchInput" type="text" placeholder="ابحث..." />
+
+        <button id="clearFiltersBtn" class="btn secondary">مسح الفلاتر</button>
+
+        <div class="stats">
+          <div class="stat-card">
+            <span>إجمالي الطلبات</span>
+            <strong id="totalCount">0</strong>
+          </div>
+          <div class="stat-card">
+            <span>الظاهر حالياً</span>
+            <strong id="filteredCount">0</strong>
+          </div>
+        </div>
+      </aside>
+
+      <section class="content">
+        <div class="content-header">
+          <h2>قائمة الطلبات</h2>
+        </div>
+        <div id="applicationsGrid" class="applications-grid"></div>
+        <div id="emptyState" class="empty-state">لا توجد طلبات حالياً</div>
+      </section>
+    </main>
+  </div>
+
+  <div id="detailsModal" class="modal hidden">
+    <div class="modal-content">
+      <button id="closeModalBtn" class="close-btn">×</button>
+      <div id="modalBody">
+        <h2>تفاصيل المتقدم</h2>
+        <div id="basicApplicantData"></div>
+      </div>
+    </div>
+  </div>
+
+<script src="admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  X-XSS-Protection: 1; mode=block
+
+/*.js
+  Cache-Control: public, max-age=86400, stale-while-revalidate=3600
+
+/*.css
+  Cache-Control: public, max-age=86400, stale-while-revalidate=3600
+
+/*.html
+  Cache-Control: no-cache, must-revalidate
