@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نموذج التقديم للوظائف | Job Application Form</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+<!-- Firebase SDK - Compatible with local file:// -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
+  <script type="module" crossorigin src="./assets/index-DO8DaGxZ.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-BtspyC5x.css">
+</head>
+<body dir="rtl">
+    <div class="notifications" role="region" aria-label="Notifications"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-container">
+            <div class="header-logos">
+                <div class="logo-left">
+                    <div class="logo-section">
+                        <img src="./assets/ministry-logo-DNAGG9PQ.png" alt="وزارة الإسكان والمرافق والمجتمعات العمرانية" class="logo">
+                        <p class="ministry-name">وزارة الإسكان<br>والمرافق والمجتمعات العمرانية</p>
+                    </div>
+                </div>
+                <div class="header-title">
+                    <h1>نموذج طلب الالتحاق بوظيفة</h1>
+                    <p>يرجى تعبئة البيانات بدقة، ثم إرسال نموذج الطلب للحصول على بيانات التأكيد.</p>
+                </div>
+                <div class="logo-right">
+                    <div class="logo-section">
+                        <img src="./assets/tameer-logo-CuVmkqSl.png" alt="التعمير لإدارة المرافق" class="logo">
+                        <p class="company-name">التعمير لإدارة المرافق</p>
+                    </div>
+                </div>
+            </div>
+            <div class="header-footer">
+                <p>ملاحظة: بعد إرسال النموذج ستظهر لك بيانات التأكيد متضمنة الرقم المرجعي وكود الوظيفة وبياناتك الشخصية.</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Job Announcement Section -->
+            <section class="announcement-section">
+                <div class="announcement-card">
+                    <h3>خطوات التقديم</h3>
+                    <ol class="steps-list">
+                        <li>املأ النموذج بالبيانات الصحيحة.</li>
+                        <li>إرفق المستندات المطلوبة.</li>
+                        <li>قم بإرسال نموذج الطلب.</li>
+                    </ol>
+                </div>
+
+                <p class="announcement-text">تعلن شركة التعمير لإدارة المرافق عن فتح باب الانضمام لفرق العمل بها بالتعاقد لعدد من الكفاءات والخبرات المختلفة، للعمل ضمن فريق احترافي في بيئة قائمة على التطوير والالتزام والجودة.</p>
+
+                <div class="announcement-card">
+                    <h3>الشروط العامة</h3>
+                    <ul class="requirements-list">
+                        <li>مؤهل مناسب للتخصص المطلوب.</li>
+                        <li>يفضل وجود خبرة سابقة في مجالات المقاولات أو إدارة وتشغيل المرافق أو التطوير العقاري.</li>
+                        <li>إجادة استخدام الحاسب الآلي والبرامج المرتبطة بالتخصص.</li>
+                        <li>القدرة على العمل ضمن فريق وتحمل ضغوط العمل.</li>
+                        <li>الالتزام والانضباط المهني.</li>
+                    </ul>
+                </div>
+
+                <div class="announcement-card">
+                    <h3>المميزات</h3>
+                    <ul class="benefits-list">
+                        <li>فرص تطوير وظيفي وتدريب مستمر.</li>
+                        <li>بيئة عمل احترافية ومشروعات متنوعة.</li>
+                    </ul>
+                </div>
+
+            </section>
+
+            <!-- Application Form -->
+            <section class="form-section">
+                <form id="applicationForm" class="application-form">
+                    <!-- Section 1: Job Position -->
+                    <div class="form-section-block">
+                        <div class="section-header">
+                            <span class="section-number">1</span>
+                            <h2>الوظيفة المطلوبة | Required Position</h2>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="jobPosition">الوظيفة المتقدم إليها | Job Position</label>
+                            <select id="jobPosition" name="jobPosition" onchange="updateJobRefNumber()" required>
+                                <option value="">اختر الوظيفة | Select Position</option>
+                                <optgroup label="المهندسين | Engineers">
+                                    <option value="civil_engineer" data-ref="ENG-001">مهندس مدني | Civil Engineer</option>
+                                    <option value="architect" data-ref="ENG-002">مهندس عمارة | Architect</option>
+                                    <option value="electrical_engineer" data-ref="ENG-003">مهندس كهرباء | Electrical Engineer</option>
+                                    <option value="mechanical_engineer" data-ref="ENG-004">مهندس ميكانيكا | Mechanical Engineer</option>
+                                    <option value="planning_engineer" data-ref="ENG-005">مهندس تخطيط | Planning Engineer</option>
+                                    <option value="technical_office_engineer" data-ref="ENG-006">مهندس مكتب فني | Technical Office Engineer</option>
+                                    <option value="execution_engineer" data-ref="ENG-007">مهندس تنفيذ | Execution Engineer</option>
+                                    <option value="project_manager" data-ref="ENG-008">مهندس إدارة مشروعات | Project Manager</option>
+                                    <option value="systems_engineer" data-ref="ENG-009">مهندس نظم وتحول رقمي | Systems & Digital Transformation Engineer</option>
+                                    <option value="cybersecurity_engineer" data-ref="ENG-010">مهندس أمن سيبراني | Cybersecurity Engineer</option>
+                                    <option value="network_engineer" data-ref="ENG-011">مهندس شبكات | Network Engineer</option>
+                                </optgroup>
+                                <optgroup label="المحاسبين | Accountants">
+                                    <option value="financial_accountant" data-ref="ACC-001">محاسب مالية | Financial Accountant</option>
+                                    <option value="cost_accountant" data-ref="ACC-002">محاسب تكاليف | Cost Accountant</option>
+                                    <option value="treasury_accountant" data-ref="ACC-003">محاسب خزينة | Treasury Accountant</option>
+                                    <option value="audit_accountant" data-ref="ACC-004">محاسب مراجعة | Audit Accountant</option>
+                                    <option value="tax_accountant" data-ref="ACC-005">محاسب ضرائب | Tax Accountant</option>
+                                    <option value="bank_accountant" data-ref="ACC-006">محاسب بنوك | Bank Accountant</option>
+                                </optgroup>
+                                <optgroup label="الإداريين والموارد البشرية | Administration & HR">
+                                    <option value="hr" data-ref="ADM-001">موارد بشرية | Human Resources</option>
+                                    <option value="admin_affairs" data-ref="ADM-002">شؤون إدارية | Administrative Affairs</option>
+                                    <option value="secretary" data-ref="ADM-003">سكرتارية | Secretary</option>
+                                    <option value="follow_up" data-ref="ADM-004">متابعة | Follow-up</option>
+                                    <option value="marketing_business" data-ref="ADM-005">متخصص تسويق وتطوير أعمال | Marketing & Business Development Specialist</option>
+                                </optgroup>
+                                <optgroup label="المشرفين | Supervisors">
+                                    <option value="site_supervisor" data-ref="SUP-001">مشرف مواقع | Site Supervisor</option>
+                                    <option value="execution_supervisor" data-ref="SUP-002">مشرف تنفيذ | Execution Supervisor</option>
+                                </optgroup>
+                                <optgroup label="الفنيين | Technicians">
+                                    <option value="plumbing_technician" data-ref="TECH-001">فني سباكة | Plumbing Technician</option>
+                                    <option value="electrical_technician" data-ref="TECH-002">فني كهرباء | Electrical Technician</option>
+                                    <option value="ac_technician" data-ref="TECH-003">فني تكييف | AC Technician</option>
+                                    <option value="operation_maintenance" data-ref="TECH-004">فني تشغيل وصيانة | Operation & Maintenance Technician</option>
+                                    <option value="carpentry_technician" data-ref="TECH-005">فني نجارة | Carpentry Technician</option>
+                                    <option value="welding_technician" data-ref="TECH-006">فني حدادة | Welding Technician</option>
+                                    <option value="finishing_technician" data-ref="TECH-007">فني تشطيبات | Finishing Technician</option>
+                                </optgroup>
+                            </select>
+                            <input type="hidden" id="jobRefNumber" name="jobRefNumber" value="">
+                        </div>
+                    </div>
+
+                    <!-- Section 2: Personal Data -->
+                    <div class="form-section-block">
+                        <div class="section-header">
+                            <span class="section-number">2</span>
+                            <h2>البيانات الشخصية | Personal Information</h2>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="fullName">الاسم رباعي | Full Name</label>
+                            <input type="text" id="fullName" name="fullName" placeholder="اكتب الاسم رباعي | Enter your full name" required>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="dateOfBirth">تاريخ الميلاد | Date of Birth</label>
+                                <input type="date" id="dateOfBirth" name="dateOfBirth" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="address">محل الإقامة | Address</label>
+                                <input type="text" id="address" name="address" placeholder="العنوان / المحافظة | City/Province" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="phone">رقم الهاتف | Phone Number</label>
+                                <input type="tel" id="phone" name="phone" placeholder="01xxxxxxxxx" pattern="[0-9\+\-\s]+" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">البريد الإلكتروني | Email</label>
+                                <input type="email" id="email" name="email" placeholder="name@example.com" required>
+                            </div>
+                        </div>
+
+<div class="form-row">
+                            <div class="form-group">
+                                <label for="maritalStatus">الحالة الاجتماعية | Marital Status</label>
+                                <select id="maritalStatus" name="maritalStatus" required>
+                                    <option value="">اختر الحالة الاجتماعية</option>
+                                    <option value="single">أعزب / عزباء</option>
+                                    <option value="married">متزوج / متزوجة</option>
+                                    <option value="divorced">مطلق / مطلقة</option>
+                                    <option value="widowed">أرمل / أرملة</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="gender">جنس المتقدم | Gender</label>
+                                <select id="gender" name="gender" required>
+                                    <option value="">اختر الجنس</option>
+                                    <option value="male">ذكر</option>
+                                    <option value="female">أنثى</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="nationalId">الرقم القومي | National ID</label>
+                                <input type="text" id="nationalId" name="nationalId" placeholder="يرجى إدخال الرقم القومي المكون من 14 رقمًا" maxlength="14" minlength="14" required>
+                            </div>
+
+<div class="form-group" id="militaryStatusGroup">
+                                <label for="militaryStatus">الموقف من التجنيد | Military Status (ذكور فقط)</label>
+                                <select id="militaryStatus" name="militaryStatus">
+                                    <option value="">اختر الموقف</option>
+                                    <option value="exempted">معفي</option>
+                                    <option value="completed">أدى الخدمة</option>
+                                    <option value="postponed">مؤجل</option>
+                                    <option value="not_due">لم يحن الوقت</option>
+                                </select>
+                            </div>
+                        </div>
+
+</div>
+
+                    <!-- Section 3: Additional Data / بيانات إضافية -->
+                    <div class="form-section-block">
+                        <div class="section-header">
+                            <span class="section-number">3</span>
+                            <h2>البيانات الإضافية | Additional Data</h2>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="availableFrom">تاريخ التفرغ للعمل | Available From</label>
+                                <input type="date" id="availableFrom" name="availableFrom" placeholder="mm/dd/yyyy">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="drivingLicense">هل تمتلك رخصة قيادة؟ | Driving License</label>
+                                <select id="drivingLicense" name="drivingLicense">
+                                    <option value="">اختر</option>
+                                    <option value="yes">نعم</option>
+                                    <option value="no">لا</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="relocate">هل تقبل العمل خارج محل الإقامة؟ | Will you relocate?</label>
+                            <select id="relocate" name="relocate">
+                                <option value="">اختر</option>
+                                <option value="yes">نعم، أقبل العمل في أي مكان</option>
+                                <option value="within_city">أفضل العمل داخل المحافظة فقط</option>
+                                <option value="no">لا، أفضل العمل في نفس المدينة</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="nationality">الجنسية | Nationality</label>
+                            <input type="text" id="nationality" name="nationality" placeholder="مصرية">
+                        </div>
+                    </div>
+
+                    <!-- Section 4: Education -->
+<div class="form-section-block">
+                        <div class="section-header">
+                            <span class="section-number">4</span>
+                            <h2>المؤهل العلمي | Education</h2>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="qualification">المؤهل | Qualification</label>
+                            <input type="text" id="qualification" name="qualification" placeholder="بكالوريوس / دبلوم..." required>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="university">جهة التخرج | University/Institute</label>
+                                <input type="text" id="university" name="university" placeholder="الجامعة / المعهد">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="specialization">التخصص | Specialization</label>
+                                <input type="text" id="specialization" name="specialization" placeholder="مثال: هندسة مدنية">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="graduationYear">سنة التخرج | Graduation Year</label>
+                                <input type="number" id="graduationYear" name="graduationYear" placeholder="مثال: 2022" min="1950" max="2100">
+                            </div>
+                        </div>
+                    </div>
+
+<!-- Section 5: Previous Experience -->
+                    <div class="form-section-block">
+                        <div class="section-header">
+                            <span class="section-number">5</span>
+                            <h2>الخبرات السابقة (ان وجدت)</h2>
+                        </div>
+
+                        <div id="experiences-container">
+                            <div class="experience-item" data-experience-id="0">
+                                <div class="experience-header">
+                                    <h4>الخبرة 1</h4>
+                                    <button type="button" class="btn btn-danger btn-sm" onclick="removeExperience(0)" style="display: none;">حذف</button>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="company0">جهة العمل</label>
+                                    <input type="text" id="company0" name="company0" placeholder="اسم الشركة">
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="jobTitle0">الوظيفة</label>
+                                        <input type="text" id="jobTitle0" name="jobTitle0" placeholder="المسمى الوظيفي">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="workDuration0">مدة العمل</label>
+                                        <input type="text" id="workDuration0" name="workDuration0" placeholder="مثال: 2023–2025">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="experienceDescription0">الوصف التفصيلي للخبرة | Experience Description</label>
+                                    <textarea id="experienceDescription0" name="experienceDescription0" placeholder="اذكر أهم Achievements والإنجازات والمهام التي قمت بها" rows="3"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+<button type="button" class="btn btn-add-experience" onclick="addExperience()">+ إضافة خبرة</button>
+                    </div>
+
+<!-- Section 6: Skills and Capabilities -->
+                    <div class="form-section-block">
+                        <div class="section-header">
+                            <span class="section-number">6</span>
+                            <h2>المهارات والقدرات | Skills & Capabilities</h2>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="languages">اللغات | Languages</label>
+                            <textarea id="languages" name="languages" placeholder="يرجى ذكر اللغات التي تجيدها ومستوى الإتقان لكل لغة" rows="2"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="computerSkills">برامج الحاسب الآلي | Computer Programs</label>
+<textarea id="computerSkills" name="computerSkills" placeholder="يرجى ذكر البرامج التي تجيد استخدامها مثل Microsoft Office أو AutoCAD أو Primavera" rows="2"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="trainingCourses">الدورات التدريبية والشهادات | Training Courses & Certificates</label>
+<textarea id="trainingCourses" name="trainingCourses" placeholder="يرجى ذكر الدورات التدريبية أو الشهادات المهنية ذات الصلة بالوظيفة" rows="3"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="technicalSkills">المهارات الفنية المرتبطة بالوظيفة | Technical Skills</label>
+<textarea id="technicalSkills" name="technicalSkills" placeholder="يرجى ذكر المهارات الفنية أو العملية التي تدعم ترشحك للوظيفة" rows="2"></textarea>
+                        </div>
+                    </div>
+
+<!-- Section 7: Additional Certificates -->
+                    <div class="form-section-block">
+                        <div class="section-header">
+                            <span class="section-number">7</span>
+                            <h2>الشهادات الإضافية | Additional Certificates</h2>
+                        </div>
+
+                        <div id="additional-certificates-container">
+                            <div class="additional-certificate-item" data-certificate-id="0" style="padding: 15px; background: white; border-radius: 6px; margin-bottom: 10px; border: 1px solid #e2e8f0;">
+                                <div class="certificate-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                    <h4 style="margin: 0; color: #334155;">شهادة 1</h4>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="additionalCertificateName">اسم الشهادة | Certificate Name</label>
+                                    <input type="text" id="additionalCertificateName" name="additionalCertificateName" placeholder="مثال: PMP, OSHA, ISO">
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="additionalCertificateIssuer">جهة الإصدار | Issuing Organization</label>
+                                        <input type="text" id="additionalCertificateIssuer" name="additionalCertificateIssuer" placeholder="مثال: PMI, ASSE">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="additionalCertificateDate">تاريخ الإصدار | Issue Date</label>
+                                        <input type="date" id="additionalCertificateDate" name="additionalCertificateDate">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="button" class="btn btn-add-experience" onclick="addAdditionalCertificate()">+ إضافة شهادة إضافية</button>
+                    </div>
+
+
+<!-- Section 8: Declaration & Signature -->
+                    <div class="form-section-block">
+                        <div class="section-header">
+<span class="section-number">8</span>
+                            <h2>الإقرار والتوقيع</h2>
+                        </div>
+
+                        <div class="form-group checkbox-group">
+                            <label>
+                                <input type="checkbox" id="declaration" name="declaration" required>
+                                <span>أقر بان البيانات والمستندات المقدمة والموافقة على مشاركة البيانات بشكل أوضح مع الشركة لغرض التوظيف</span>
+                            </label>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="signatureName">اسم المقرر</label>
+                                <input type="text" id="signatureName" name="signatureName" placeholder="اكتب اسمك" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="date">التاريخ</label>
+                                <input type="date" id="date" name="date" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="notes">ملاحظات إضافية (اختياري)</label>
+                            <textarea id="notes" name="notes" placeholder="أي تفاصيل تحب تضيفها" rows="4"></textarea>
+                        </div>
+                    </div>
+
+<!-- Form Actions -->
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-submit" onclick="submitApplicationToRTDB()">ارسال نموذج الطلب</button>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </main>
+
+    <!-- Image to PDF Converter Tool -->
+    <section class="image-to-pdf-section" id="imageToPdfSection" style="display: none;">
+        <div class="container">
+            <div class="image-to-pdf-container">
+                <div class="image-to-pdf-header">
+                    <h2>🖼️ أداة تحويل الصور إلى PDF | Image to PDF Converter</h2>
+                    <button type="button" class="btn btn-close-tool" onclick="toggleImageToPdfTool()">إغلاق | Close</button>
+                </div>
+
+                <div class="image-to-pdf-content">
+                    <div class="upload-area" id="uploadArea">
+                        <div class="upload-icon">📁</div>
+                        <h3>قم برفع الصور | Select Images</h3>
+                        <p>اسحب الصور هنا أو انقر للاختيار | Drag images here or click to select</p>
+                        <input type="file" id="imagesToConvert" accept="image/*" multiple onchange="handleImageSelection(this)">
+                        <label for="imagesToConvert" class="upload-button">اختر الصور | Choose Images</label>
+                    </div>
+
+                    <div id="imagePreviewContainer" class="image-preview-container" style="display: none;">
+                        <h3>الصور المختارة | Selected Images</h3>
+                        <div id="imagePreviewsList" class="images-list"></div>
+                    </div>
+
+                    <div id="conversionOptions" class="conversion-options" style="display: none;">
+                        <h3>خيارات التحويل | Conversion Options</h3>
+                        <div class="options-row">
+                            <div class="option-group">
+                                <label for="orientation">اتجاه الصفحة | Page Orientation:</label>
+                                <select id="orientation">
+                                    <option value="portrait">عمودي | Portrait</option>
+                                    <option value="landscape">أفقي | Landscape</option>
+                                </select>
+                            </div>
+
+                            <div class="option-group">
+                                <label for="imageQuality">جودة الصورة | Image Quality:</label>
+                                <select id="imageQuality">
+                                    <option value="high">عالية | High</option>
+                                    <option value="medium" selected>متوسطة | Medium</option>
+                                    <option value="low">منخفضة | Low</option>
+                                </select>
+                            </div>
+
+                            <div class="option-group">
+                                <label for="pdfName">اسم ملف PDF:</label>
+                                <input type="text" id="pdfName" placeholder="مثال: تقريري | e.g., my-report" value="converted-images">
+                            </div>
+                        </div>
+
+                        <div class="options-row">
+                            <label>
+                                <input type="checkbox" id="fitToPage" checked>
+                                <span>ملاءمة الصورة للصفحة | Fit image to page</span>
+                            </label>
+                            <label>
+                                <input type="checkbox" id="addPageNumbers">
+                                <span>إضافة أرقام الصفحات | Add page numbers</span>
+                            </label>
+                        </div>
+
+                        <div class="conversion-actions">
+                            <button type="button" class="btn btn-submit" onclick="convertImagesToPdf()">
+                                تحويل إلى PDF | Convert to PDF
+                            </button>
+                            <button type="button" class="btn btn-secondary" onclick="clearImageSelection()">
+                                مسح | Clear
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="progressContainer" class="progress-container" style="display: none;">
+                        <p>جاري التحويل... | Converting...</p>
+                        <div class="progress-bar">
+                            <div id="progressFill" class="progress-fill"></div>
+                        </div>
+                        <p id="progressText">0%</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2026 شركة التعمير لإدارة المرافق - جميع الحقوق محفوظة</p>
+        </div>
+    </footer>
+
+</body>
+</html>
+

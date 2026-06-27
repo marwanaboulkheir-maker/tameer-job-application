@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>لوحة التحكم | Admin Dashboard</title>
+  <link rel="stylesheet" href="admin.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <h1>لوحة تحكم طلبات التوظيف</h1>
+    
+  </header>
+
+  <main class="layout">
+    <aside class="sidebar">
+      <h2>التصفية</h2>
+      <label>الوظيفة</label>
+      <select id="jobFilter">
+        <option value="">الكل</option>
+      </select>
+
+      <label>بحث بالاسم / الهاتف / البريد</label>
+      <input id="searchInput" type="text" placeholder="ابحث..." />
+
+      <button id="clearFiltersBtn" class="btn secondary">مسح الفلاتر</button>
+
+      <div class="stats">
+        <div class="stat-card">
+          <span>إجمالي الطلبات</span>
+          <strong id="totalCount">0</strong>
+        </div>
+        <div class="stat-card">
+          <span>الظاهر حالياً</span>
+          <strong id="filteredCount">0</strong>
+        </div>
+      </div>
+    </aside>
+
+    <section class="content">
+      <div class="content-header">
+        <h2>قائمة الطلبات</h2>
+      </div>
+      <div id="applicationsGrid" class="applications-grid"></div>
+      <div id="emptyState" class="empty-state">لا توجد طلبات حالياً</div>
+    </section>
+  </main>
+
+  <div id="detailsModal" class="modal hidden">
+    <div class="modal-content">
+      <button id="closeModalBtn" class="close-btn">×</button>
+      <div id="modalBody">
+        <h2>تفاصيل المتقدم</h2>
+        <div id="basicApplicantData"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>

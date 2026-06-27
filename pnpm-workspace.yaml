@@ -1,0 +1,6 @@
+packages:
+  - .
+
+pnpm:
+  # إعداد أمان pnpm (لتشغيل سكربتات البناء مثل esbuild)
+  dangerouslyAllowAllBuilds: true

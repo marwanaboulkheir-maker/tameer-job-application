@@ -1,0 +1,19 @@
+name                = "tameer-gateway"
+main                = "worker.js"
+compatibility_date  = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
+
+# Cron: refresh health cache every minute
+[triggers]
+crons = ["* * * * *"]
+
+[env.production]
+name = "tameer-gateway"
+
+# Optional KV for persistent health state across Workers instances
+# Uncomment after creating KV namespace:
+#   npx wrangler kv namespace create "HEALTH"
+# then paste the returned id below:
+# [[kv_namespaces]]
+# binding = "HEALTH"
+# id      = "REPLACE_WITH_YOUR_KV_ID"

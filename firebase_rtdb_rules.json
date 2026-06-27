@@ -1,0 +1,15 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "applications": {
+      ".read": true,
+      ".write": true,
+      ".indexOn": ["jobPosition", "submittedAt", "status", "requestRefNumber"]
+    },
+    "admin": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    }
+  }
+}
